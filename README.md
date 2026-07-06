@@ -2,8 +2,6 @@
 
 Aplikasi **"Simple Personality Quiz"** (Tes Kepribadian Sederhana) adalah aplikasi fullstack web yang dirancang untuk kebutuhan uji teknis (technical test). Aplikasi ini menghitung skor kepribadian pengguna berdasarkan jawaban pilihan kuis tanpa database (menggunakan penyimpanan lokal `localStorage` di sisi frontend).
 
-Aplikasi ini mengedepankan **clean code**, kemudahan dibaca, serta performa dan desain antarmuka yang premium, simpel, dan elegan tanpa bar scroll browser utama (immersif).
-
 ---
 
 ## 🛠️ Stack Teknologi
