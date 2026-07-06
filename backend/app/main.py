@@ -6,23 +6,20 @@ import uvicorn
 
 app = FastAPI(title="Personality Quiz API")
 
-# Mengaktifkan CORS agar Frontend (Vite) dapat mengakses API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Pada production, batasi ke domain frontend Anda
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Definisi Pilihan Jawaban dan Nilai Skornya
 options = [
     {"option": "Agree", "score": 3},
     {"option": "Neutral", "score": 2},
     {"option": "Disagree", "score": 1},
 ]
 
-# Daftar 10 Pertanyaan Tes Kepribadian
 questions = [
     {"id": 1, "question": "Saya lebih suka bekerja secara mandiri daripada dalam tim."},
     {"id": 2, "question": "Saya lebih mengandalkan logika daripada perasaan saat membuat keputusan."},
@@ -36,15 +33,13 @@ questions = [
     {"id": 10, "question": "Saya bisa tetap tenang dan bekerja secara efektif di bawah tenggat waktu yang ketat."}
 ]
 
-# Schema untuk Input Jawaban Pengguna
 class AnswerItem(BaseModel):
     question_id: int
-    answer: str  # "Agree" | "Neutral" | "Disagree"
+    answer: str  
 
 class CalculateRequest(BaseModel):
     answers: List[AnswerItem]
 
-# Endpoint GET /api/questions
 @app.get("/api/questions")
 def get_questions():
     """
@@ -55,7 +50,6 @@ def get_questions():
         "options": [opt["option"] for opt in options]
     }
 
-# Endpoint POST /api/calculate
 @app.post("/api/calculate")
 def calculate_score(request: CalculateRequest):
     """
@@ -66,7 +60,6 @@ def calculate_score(request: CalculateRequest):
     score_map = {opt["option"]: opt["score"] for opt in options}
     
     for item in request.answers:
-        # Mengambil skor berdasarkan pilihan jawaban, default ke Neutral (2) jika tidak cocok
         score = score_map.get(item.answer, 2)
         total_score += score
         
